@@ -10,7 +10,7 @@ puts "==============="
 
 def main
   url = @config["url"]
-  dir_name = url.gsub("http://", '').gsub("https://", '').split('/').first
+  dir_name = "Finished/" + url.gsub("http://", '').gsub("https://", '').split('/').first
   puts dir_name
 
   download_website(url) unless File.file?("#{dir_name}/index.html")
@@ -31,10 +31,16 @@ def main
   make_welcome_card_mock(dir_name, page)
   make_referrals_mock(dir_name, page)
   make_vip_mock(dir_name, page)
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/index.html")
+    File.delete("#{dir_name}/close.svg")
+  end
+
 end
 
 def download_website(url)
-  `wget -p -k #{url}`
+  `wget -p -k --directory-prefix=Finished #{url}`
 end
 
 def get_webpage(dir_name)
@@ -122,10 +128,10 @@ def get_welcome_card_injection
   .referral-receiver {
     position: fixed;
     left: 25px;
-    top: 440px;
+    top: 340px;
     z-index: 25;
-    width: 360px;
-    height: 550px;
+    width: 430px;
+    height: 650px;
     background-image: url("../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
@@ -143,14 +149,14 @@ def get_referral_injection
   .referral-receiver {
     position: fixed;
     left: 25px;
-    top: 440px;
+    top: 340px;
     z-index: 25;
-    width: 360px;
-    height: 550px;
+    width: 430px;
+    height: 650px;
     background-image: url("../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0px -560px;
+    background-position: 0px -670px;
     box-shadow: 1px 0 20px rgba(0,0,0,.1);
     border-radius: 5px;
   }
@@ -165,10 +171,10 @@ def get_vip_injection
   .referral-receiver {
     position: fixed;
     left: 25px;
-    top: 440px;
+    top: 340px;
     z-index: 25;
-    width: 360px;
-    height: 550px;
+    width: 430px;
+    height: 650px;
     background-image: url("../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
@@ -198,6 +204,10 @@ def make_launcher_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/launcher_mock.html #{dir_name}/launcher_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/launcher_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/launcher_mock.html")
+  end
 end
 
 def make_referral_receiver_mock(dir_name, page)
@@ -216,6 +226,10 @@ def make_referral_receiver_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/referral_receiver_mock.html #{dir_name}/referral_receiver_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/referral_receiver_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/referral_receiver_mock.html")
+  end
 end
 
 def make_signup_mock(dir_name, page)
@@ -234,6 +248,10 @@ def make_signup_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/signup_mock.html #{dir_name}/signup_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/signup_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/signup_mock.html")
+  end
 end
 
 def make_welcome_card_mock(dir_name, page)
@@ -252,6 +270,10 @@ def make_welcome_card_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/welcome_card_and_points_mock.html #{dir_name}/welcome_card_and_points_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/welcome_card_and_points_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/welcome_card_and_points_mock.html")
+  end
 end
 
 def make_referrals_mock(dir_name, page)
@@ -270,6 +292,10 @@ def make_referrals_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/referral_mock.html #{dir_name}/referral_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/referral_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/referral_mock.html")
+  end
 end
 
 def make_vip_mock(dir_name, page)
@@ -288,9 +314,10 @@ def make_vip_mock(dir_name, page)
     x.report { `phantomjs screengrabber.js #{dir_name}/vip_mock.html #{dir_name}/vip_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/vip_mock.png"
+
+  unless ARGV[2] == "debug"
+    File.delete("#{dir_name}/vip_mock.html")
+  end
 end
 
 main
-
-
-
