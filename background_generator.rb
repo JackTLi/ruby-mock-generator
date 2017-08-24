@@ -64,7 +64,7 @@ def get_launcher_injection
       height: 50px;
     }
    </style>'''
-  html_block = '<div class="mock-launcher"> <img src="../'+ @config["launcher"] +'" </div>'
+  html_block = '<div class="mock-launcher"> <img src="../../'+ @config["launcher"] +'" </div>'
 
   css_block + html_block
 end
@@ -104,7 +104,7 @@ def get_referral_receiver_injection
   }
   </style>'''
 
-  html_block = '<div class="referral-receiver"> <img src="../'+ @config["referral_receiver"] +'" </div>'
+  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["referral_receiver"] +'" </div>'
   css_block + html_block
 end
 
@@ -125,7 +125,7 @@ def get_signup_injection
   }
   </style>'''
 
-  html_block = '<div class="referral-receiver"> <img src="../'+ @config["signup"] +'" </div>'
+  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["signup"] +'" </div>'
   css_block + html_block
 end
 
@@ -138,7 +138,7 @@ def get_welcome_card_injection
     z-index: 25;
     width: 430px;
     height: 650px;
-    background-image: url("../' + @config["program_card"] + '");
+    background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: 1px 0 20px rgba(0,0,0,.1);
@@ -159,7 +159,7 @@ def get_referral_injection
     z-index: 25;
     width: 430px;
     height: 650px;
-    background-image: url("../' + @config["program_card"] + '");
+    background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0px -670px;
@@ -181,7 +181,7 @@ def get_vip_injection
     z-index: 25;
     width: 430px;
     height: 650px;
-    background-image: url("../' + @config["program_card"] + '");
+    background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -329,4 +329,3 @@ end
 global_config["sites"].each do |site|
   create_mocks(site)
 end
-
