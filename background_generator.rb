@@ -28,7 +28,7 @@ def create_mocks(config)
   page.gsub!('cdn.sweettooth.io', '')
 
   make_launcher_mock(dir_name, page)
-  make_referral_receiver_mock(dir_name, page)
+  make_referral_receiver_mock(dir_name, page) if @config["referral_receiver"]
   make_signup_mock(dir_name, page)
   make_welcome_card_mock(dir_name, page)
   make_referrals_mock(dir_name, page)
@@ -42,7 +42,11 @@ def create_mocks(config)
 end
 
 def download_website(url)
-  `wget -p -k --directory-prefix=Finished #{url}`
+  if @config["wordpress"]
+    `wget -p --directory-prefix=Finished #{url}`
+  else
+    `wget -p -k --directory-prefix=Finished #{url}`
+  end
 end
 
 def get_webpage(dir_name)
@@ -322,7 +326,7 @@ def make_vip_mock(dir_name, page)
   end
 end
 
-@config["sites"].each do |site|
+global_config["sites"].each do |site|
   create_mocks(site)
 end
 
