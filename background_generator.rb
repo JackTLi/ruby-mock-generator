@@ -3,12 +3,14 @@ require 'yaml'
 require 'benchmark'
 
 file_name = ARGV[0]
-@config= YAML.load_file(file_name)
+global_config= YAML.load_file(file_name)
 puts "=====CONFIG===="
-puts @config
+puts global_config
 puts "==============="
 
-def main
+def create_mocks(config)
+  @config = config
+
   url = @config["url"]
   dir_name = "Finished/" + url.gsub("http://", '').gsub("https://", '').split('/').first
   puts dir_name
@@ -320,4 +322,7 @@ def make_vip_mock(dir_name, page)
   end
 end
 
-main
+@config["sites"].each do |site|
+  create_mocks(site)
+end
+
