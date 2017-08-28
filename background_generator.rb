@@ -35,8 +35,9 @@ def create_mocks(config)
   make_vip_mock(dir_name, page)
 
   unless ARGV[2] == "debug"
-    File.delete("#{dir_name}/index.html")
-    File.delete("#{dir_name}/close.svg")
+    File.delete("#{dir_name}/index.html") if File.file?("#{dir_name}/index.html")
+    File.delete("#{dir_name}/close.svg") if File.file?("#{dir_name}/close.svg")
+    File.delete("#{dir_name}/robots.txt")if File.file?("#{dir_name}/robots.txt")
   end
 
 end
@@ -53,12 +54,31 @@ def get_webpage(dir_name)
   File.read("#{dir_name}/index.html")
 end
 
+def get_background_injection
+  css_block = '''<style>
+    .mock-launcher {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 9998;
+    }
+    .mock-launcher img {
+      height: 1080px;
+      width: 1920px
+    }
+   </style>'''
+  html_block = '<div class="mock-bg"> <img src="../../'+ @config["background"] +'" </div>'
+
+  css_block + html_block
+end
+
 def get_launcher_injection
   css_block = '''<style>
     .mock-launcher {
       position: fixed;
       left: 25px;
       top: 1005px;
+      z-index: 9999;
     }
     .mock-launcher img {
       height: 50px;
@@ -75,6 +95,7 @@ def get_open_launcher_injection
     position: fixed;
     left: 25px;
     top: 1005px;
+    z-index: 9999;
   }
   .mock-launcher img {
     height: 50px;
@@ -93,7 +114,7 @@ def get_referral_receiver_injection
     position: fixed;
     left: 25px;
     top: 620px;
-    z-index: 25;
+    z-index: 9999;
   }
   .referral-receiver img {
     width: auto;
@@ -114,7 +135,7 @@ def get_signup_injection
     position: fixed;
     left: 25px;
     top: 620px;
-    z-index: 25;
+    z-index: 9999;
   }
   .referral-receiver img {
     width: auto;
@@ -135,7 +156,7 @@ def get_welcome_card_injection
     position: fixed;
     left: 25px;
     top: 340px;
-    z-index: 25;
+    z-index: 9999;
     width: 430px;
     height: 650px;
     background-image: url("../../' + @config["program_card"] + '");
@@ -156,7 +177,7 @@ def get_referral_injection
     position: fixed;
     left: 25px;
     top: 340px;
-    z-index: 25;
+    z-index: 9999;
     width: 430px;
     height: 650px;
     background-image: url("../../' + @config["program_card"] + '");
@@ -178,7 +199,7 @@ def get_vip_injection
     position: fixed;
     left: 25px;
     top: 340px;
-    z-index: 25;
+    z-index: 9999;
     width: 430px;
     height: 650px;
     background-image: url("../../' + @config["program_card"] + '");
@@ -198,6 +219,7 @@ def make_launcher_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_launcher_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/launcher_mock.html"
@@ -207,7 +229,7 @@ def make_launcher_mock(dir_name, page)
 
   puts "Benchmark for generating png for #{dir_name}/launcher_mock.png"
   Benchmark.bm do |x|
-    x.report { `phantomjs screengrabber.js #{dir_name}/launcher_mock.html #{dir_name}/launcher_mock.png` } unless ARGV[1] == "skip"
+    x.report { `phantomjs --ignore-ssl-errors=true --ssl-protocol=any screengrabber.js #{dir_name}/launcher_mock.html #{dir_name}/launcher_mock.png` } unless ARGV[1] == "skip"
   end
   puts "Done phantomjs for #{dir_name}/launcher_mock.png"
 
@@ -220,6 +242,7 @@ def make_referral_receiver_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_referral_receiver_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/referral_receiver_mock.html"
@@ -242,6 +265,7 @@ def make_signup_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_signup_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/signup_mock.html"
@@ -264,6 +288,7 @@ def make_welcome_card_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_welcome_card_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/welcome_card_and_points_mock.html"
@@ -286,6 +311,7 @@ def make_referrals_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_referral_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/referral_mock.html"
@@ -308,6 +334,7 @@ def make_vip_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_vip_injection
+  first_half += get_background_injection if @config["background"]
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/vip_mock.html"
