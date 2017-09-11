@@ -1,49 +1,41 @@
-# Desktop Mock Generator
-
-Creates merchant mocks for Desktop view.
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine to create the mocks.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+1. Text editor [Atom](https://atom.io/)
+2. Install homebrew (run the following in your terminal
+  ```
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
+3. Install wget by running the following:
+  ```
+  brew install wget
+  ```
+4. Install phantomjs by running the following:
+  ```
+  brew install phantomjs
+  ```
 
 ## Design Requirements
 
-You can find the [sketch file](www.smile.io) that has been formated with the correct asset names.
+1. Download [sketch template](www.smile.io)
+2. After you have finished your designs export your assets and you will have two folders **Mocks** and **Assets**
+<!-- This [sketch file](www.smile.io) has been formatted with the correct asset names, so use this as the base. Just click export in sketch and you will have a folder with the name "Mocks" and "Assets". -->
 
-The design assets that is required to run this script and the required naming conventions:
+<!-- The design assets that is required to run this script and the required naming conventions:
 
-| Type of asset          | Name              | Notes                                         |
+| Type of asset          | File Name         | Notes                                         |
 | ---------------------- |:-----------------:|:---------------------------------------------:|
 | launcher               | Launcher.png      |                                               |
 | referral receiver card | Program Cards.png |                                               |
 | sign up card           | Signup.png        |                                               |
-| background             | Background.png    | Used only if url doesn't pull image correctly |
+| background             | Background.png    | Use only if url doesn't pull assets correctly | -->
+
+```
+example of file structure
+```
 
 ### Notes: Details on what is required for Background.png
 
@@ -114,10 +106,10 @@ gif of how to use terminal
 ## Built With
 
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [WGet](https://www.gnu.org/software/wget/) - Part of the GNU Project, wget has a flag that allows downloading of a webpage along with all of its required assets. It will also embed referenced scripts and styles inline into the html file.
+* [Ruby](https://www.ruby-lang.org/en/) - Quick scripting, meat and potatoes are here.
+* [PhantomJS](http://phantomjs.org/) - Allows us to render webpages in a headless browser and take screenshots of the results.
 
 ## Acknowledgments
 
-* This was created by Jack Li (github handle). lol this person doesn't work for Smile.io
+* This was created by [Jack Li](https://github.com/jacktli). lol this person doesn't work for Smile.io
