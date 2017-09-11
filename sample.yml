@@ -1,15 +1,11 @@
 sites:
-  -
-    url: https://www.litsprings.com/
-    launcher: "litsprings/launcher.png"
-    launcher_color: '#ff0000'
-    referral_receiver: "litsprings/Referral Receiver.png"
-    program_card: "litsprings/Program Cards.png"
-    signup: "litsprings/Signup.png"
-  -
-    url: https://www.jackteststoreprod.com/
-    launcher: "jackteststoreprod/launcher.png"
-    launcher_color: '#ff0000'
-    referral_receiver: "jackteststoreprod/Referral Receiver.png"
-    program_card: "jackteststoreprod/Program Cards.png"
-    signup: "jackteststoreprod/Signup.png"
+-
+  url: shop.sho-products.com/
+  # background: "Merchants/Sole Heaven/Background.png"
+  wordpress: false
+  launcher: "Merchants/Wine Growers Direct/Launcher.png"
+  launcher_color: '#000000'
+  orientation: "left"
+  referral_receiver: "Merchants/Wine Growers Direct/Referral Receiver.png"
+  program_card: "Merchants/Wine Growers Direct/Program Cards.png"
+  signup: "Merchants/Wine Growers Direct/Signup.png"

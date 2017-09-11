@@ -56,18 +56,19 @@ end
 
 def get_background_injection
   css_block = '''<style>
-    .mock-launcher {
+    .mock-bg {
       position: fixed;
       left: 0px;
       top: 0px;
       z-index: 9998;
     }
-    .mock-launcher img {
-      height: 1080px;
-      width: 1920px
+    .mock-bg img {
+      height: 1080px !important;
+      width: 1920px !important;
     }
    </style>'''
-  html_block = '<div class="mock-bg"> <img src="../../'+ @config["background"] +'" </div>'
+  html_block = '<div class="mock-bg"> <img src="../../'+ @config["background"] +'"/> </div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
 
   css_block + html_block
 end
@@ -81,10 +82,11 @@ def get_launcher_injection
       z-index: 9999;
     }
     .mock-launcher img {
-      height: 50px;
+      height: 50px !important;
     }
    </style>'''
-  html_block = '<div class="mock-launcher"> <img src="../../'+ @config["launcher"] +'" </div>'
+  html_block = '<div class="mock-launcher"> <img src="../../'+ @config["launcher"] +'"/> </div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
 
   css_block + html_block
 end
@@ -98,12 +100,13 @@ def get_open_launcher_injection
     z-index: 9999;
   }
   .mock-launcher img {
-    height: 50px;
-    width: 50px;
+    height: 50px !important;
+    width: 50px !important;
   }
   </style>'''
 
   html_block = '<div class="mock-launcher"> <img src="close.svg"> </div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
 
   css_block + html_block
 end
@@ -117,15 +120,17 @@ def get_referral_receiver_injection
     z-index: 9999;
   }
   .referral-receiver img {
-    width: auto;
-    height: 360px;
+    width: auto !important;
+    height: 360px !important;
     z-index: 5;
     box-shadow: 1px 0 20px rgba(0,0,0,.1);
     border-radius: 5px;
   }
   </style>'''
 
-  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["referral_receiver"] +'" </div>'
+  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["referral_receiver"] +'"/> </div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+
   css_block + html_block
 end
 
@@ -138,15 +143,17 @@ def get_signup_injection
     z-index: 9999;
   }
   .referral-receiver img {
-    width: auto;
-    height: 360px;
+    width: auto !important;
+    height: 360px !important;
     z-index: 5;
     box-shadow: 1px 0 20px rgba(0,0,0,.1);
     border-radius: 5px;
   }
   </style>'''
 
-  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["signup"] +'" </div>'
+  html_block = '<div class="referral-receiver"> <img src="../../'+ @config["signup"] +'"/> </div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+
   css_block + html_block
 end
 
@@ -157,8 +164,8 @@ def get_welcome_card_injection
     left: 25px;
     top: 340px;
     z-index: 9999;
-    width: 430px;
-    height: 650px;
+    width: 430px !important;
+    height: 650px !important;
     background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
@@ -168,6 +175,8 @@ def get_welcome_card_injection
   </style>'''
 
   html_block = '<div class="referral-receiver"></div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+
   css_block + html_block
 end
 
@@ -178,8 +187,8 @@ def get_referral_injection
     left: 25px;
     top: 340px;
     z-index: 9999;
-    width: 430px;
-    height: 650px;
+    width: 430px !important;
+    height: 650px !important;
     background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
@@ -190,6 +199,8 @@ def get_referral_injection
   </style>'''
 
   html_block = '<div class="referral-receiver"></div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+
   css_block + html_block
 end
 
@@ -200,8 +211,8 @@ def get_vip_injection
     left: 25px;
     top: 340px;
     z-index: 9999;
-    width: 430px;
-    height: 650px;
+    width: 430px !important;
+    height: 650px !important;
     background-image: url("../../' + @config["program_card"] + '");
     background-size: cover;
     background-repeat: no-repeat;
@@ -212,6 +223,8 @@ def get_vip_injection
   </style>'''
 
   html_block = '<div class="referral-receiver"></div>'
+  css_block.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+  
   css_block + html_block
 end
 
@@ -219,7 +232,9 @@ def make_launcher_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_launcher_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/launcher_mock.html"
@@ -242,7 +257,9 @@ def make_referral_receiver_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_referral_receiver_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/referral_receiver_mock.html"
@@ -265,7 +282,9 @@ def make_signup_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_signup_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/signup_mock.html"
@@ -288,7 +307,9 @@ def make_welcome_card_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_welcome_card_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/welcome_card_and_points_mock.html"
@@ -311,7 +332,9 @@ def make_referrals_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_referral_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/referral_mock.html"
@@ -334,7 +357,9 @@ def make_vip_mock(dir_name, page)
   first_half, second_half = page.split("</body>")
 
   injection = get_open_launcher_injection + get_vip_injection
-  first_half += get_background_injection if @config["background"]
+  if @config["background"]
+    first_half = "<body>" + get_background_injection
+  end
 
   final_result = first_half + injection + "</body>" + second_half
   file_name ="#{dir_name}/vip_mock.html"
