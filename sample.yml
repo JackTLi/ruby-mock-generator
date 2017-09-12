@@ -1,11 +1,6 @@
 sites:
 -
-  url: shop.sho-products.com/
-  # background: "Merchants/Sole Heaven/Background.png"
-  wordpress: false
-  launcher: "Merchants/Wine Growers Direct/Launcher.png"
-  launcher_color: '#000000'
+  url: www.litsprings.xyz
   orientation: "left"
-  referral_receiver: "Merchants/Wine Growers Direct/Referral Receiver.png"
-  program_card: "Merchants/Wine Growers Direct/Program Cards.png"
-  signup: "Merchants/Wine Growers Direct/Signup.png"
+  launcher_color: '#000000'
+  asset_path: "Merchants/litsprings"

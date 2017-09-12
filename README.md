@@ -4,8 +4,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-1. Text editor [Atom](https://atom.io/)
-2. Install homebrew (run the following in your terminal
+1. Text editor [Atom](https://atom.io/). This will be used to edit your ***sample.yml*** file
+2. Open terminal and install homebrew
   ```
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   ```
@@ -17,11 +17,12 @@ These instructions will get you a copy of the project up and running on your loc
   ```
   brew install phantomjs
   ```
+5. Download [repository](https://github.com/smile-io/smile-mock-image-generator) and put the folder **ruby-mock-generator** into your Documents
 
 ## Design Requirements
 
-1. Download [sketch template](www.smile.io)
-2. After you have finished your designs export your assets and you will have two folders **Mocks** and **Assets**
+1. Download [sketch template](https://www.dropbox.com/s/g6u1c7wafzpcpne/Script%20Template.sketch?dl=0)
+2. After you have finished your designs export your assets and you will have two folders **Mocks** and **Assets**. The only folder that you will need is **Mocks**, while **Assets** will be given to Success Managers to upload assets.
 <!-- This [sketch file](www.smile.io) has been formatted with the correct asset names, so use this as the base. Just click export in sketch and you will have a folder with the name "Mocks" and "Assets". -->
 
 <!-- The design assets that is required to run this script and the required naming conventions:
@@ -33,34 +34,44 @@ These instructions will get you a copy of the project up and running on your loc
 | sign up card           | Signup.png        |                                               |
 | background             | Background.png    | Use only if url doesn't pull assets correctly | -->
 
-```
-example of file structure
-```
-
-### Notes: Details on what is required for Background.png
+<!-- ### Notes: Details on what is required for Background.png
 
 If the script can't pull the website properly please manually screenshot the website in the ratio 1902px x 1080px. Please name the file "Background.png"
 
 ```
 Gif of how to screenshot on chrome
-```
+``` -->
 
 ## How to use Script
 
-You can download the [template](wwww.smile.io) here.
+1. Go to **ruby-mock-generator** and open **sample.yml**
+2. Edit the variables
 
 ```
-sites:
--
-  url: shop.sho-products.com/
-  # background: "Merchants/Merchant-Folder-Name/Background.png"
-  wordpress: false
-  launcher: "Merchants/Merchant-Folder-Name/Launcher.png"
-  launcher_color: '#000000'
-  orientation: "left"
-  referral_receiver: "Merchants/Merchant-Folder-Name/Referral Receiver.png"
-  program_card: "Merchants/Merchant-Folder-Name/Program Cards.png"
-  signup: "Merchants/Merchant-Folder-Name/Signup.png"
+# This is the merchant's website
+url: shop.sho-products.com/
+
+# If website doesn't look accurate include a screenshot of the website. You still need to include the url above.
+background: "Merchants/Sole Heaven/Background.png"
+
+# This is the alignment of the launcher. Choose one from below.
+orientation: "left"
+orientation: "right"
+
+# This is the colour of the launcher
+launcher_color: '#000000'
+
+# Image of the launcher
+launcher: "Merchants/Wine Growers Direct/Launcher.png"
+
+#Image of referral receiver
+referral_receiver: "Merchants/Wine Growers Direct/Referral Receiver.png"
+
+#Image of program cards
+program_card: "Merchants/Wine Growers Direct/Program Cards.png"
+
+#Image of signup card
+signup: "Merchants/Wine Growers Direct/Signup.png"
 ```
 
 ### How to skip certain mocks
