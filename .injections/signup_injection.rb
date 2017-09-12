@@ -1,6 +1,6 @@
 require './.injections/injection.rb'
 
-class OpenLauncherInjection < Injection
+class SignupInjection < Injection
   def css
     '''<style>
     .referral-receiver {

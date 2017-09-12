@@ -4,7 +4,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-1. Text editor [Atom](https://atom.io/). This will be used to edit your ***sample.yml*** file
+1. Text editor [Atom](https://atom.io/). This will be used to edit your **sample.yml** file
 2. Open terminal and install homebrew
   ```
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -41,77 +41,36 @@ If the script can't pull the website properly please manually screenshot the web
 ```
 Gif of how to screenshot on chrome
 ``` -->
-
 ## How to use Script
 
-1. Go to **ruby-mock-generator** and open **sample.yml**
-2. Edit the variables
+1. Add **Mocks** into the **Merchant** folder, you can rename **Mocks** to the merchant name (E.g. Smile)
+2. Go to **ruby-mock-generator** and open **sample.yml**
+3. Edit the variables
 
 ```
-# This is the merchant's website
-url: shop.sho-products.com/
+# Merchant's website. If any errors occur you can manually add in an image (1920px x 1080px) of the website with the file name Background.png and place it in folder with the rest of the assets.
+url: https://smile.io
 
-# If website doesn't look accurate include a screenshot of the website. You still need to include the url above.
-background: "Merchants/Sole Heaven/Background.png"
+add image of the settings
 
-# This is the alignment of the launcher. Choose one from below.
+# Launcher alignment. It can either be from the right or left. Choose one from below.
 orientation: "left"
 orientation: "right"
 
-# This is the colour of the launcher
+# Launcher colour.
 launcher_color: '#000000'
 
-# Image of the launcher
-launcher: "Merchants/Wine Growers Direct/Launcher.png"
-
-#Image of referral receiver
-referral_receiver: "Merchants/Wine Growers Direct/Referral Receiver.png"
-
-#Image of program cards
-program_card: "Merchants/Wine Growers Direct/Program Cards.png"
-
-#Image of signup card
-signup: "Merchants/Wine Growers Direct/Signup.png"
-```
-
-### How to skip certain mocks
-
-If the merchant does not need to have certain mocks you can skip by adding the string "skip". This string will only work for the types of assets listed below.
-
-```
-launcher: "skip"
-referral_receiver: "skip"
-program_card: "skip"
-signup: "skip"
-```
-
-### How to change the launcher alignment
-
-If you need to change the alignment of the launcher you can add the strong "left" or "right".
-
-```
-orientation: "left"
-orientation: "right"
-```
-
-### How to change the launcher colour
-
-If you need to change the launcher colour you can just write the hex code.
-
-```
-launcher_color: "#000000"
+# Location of all your assets
+asset_path: "Merchants/Smile"
 ```
 
 ## To run the script
 
 1. Open Terminal
 2. Find the folder where you added ruby-mock-generator (you can use "cd folder_name" to go into the folder and "ls" to see which folders are available)
+3. After you find ruby-mock-generator then type
 ```
-gif of how to use terminal
-```
-3. After you find ruby-mock-generator then type in "ruby background_generator.rb sample.yml"
-```
-gif of how to use terminal
+ruby background_generator.rb sample.yml
 ```
 
 ## Built With

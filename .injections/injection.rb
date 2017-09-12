@@ -5,7 +5,8 @@ class Injection
   end
 
   def get_injection
-    css.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
-    css + html
+    css_injection = css
+    css_injection.gsub!("left", "right") if @config["orientation"] && @config["orientation"] == "right"
+    css_injection + html
   end
 end

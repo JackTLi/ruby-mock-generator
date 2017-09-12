@@ -1,6 +1,17 @@
 sites:
+
 -
-  url: www.litsprings.xyz
+  url: https://pixibeauty.co.uk/
   orientation: "left"
-  launcher_color: '#000000'
-  asset_path: "Merchants/litsprings"
+  launcher_color: '#C8D4A4'
+  asset_path: "Merchants/Pixi"
+-
+  url: https://unitedbyblue.com/
+  orientation: "right"
+  launcher_color: '#052533'
+  asset_path: "Merchants/United by blue"
+-
+  url: https://cycoordi.com/
+  orientation: "right"
+  launcher_color: '#87CEFA'
+  asset_path: "Merchants/Cycoordi"

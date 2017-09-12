@@ -18,6 +18,7 @@ def create_mocks(config)
 
   background_path = "#{@config["asset_path"]}/Background.png"
   if File.file?(background_path)
+    FileUtils.mkdir_p(@dir_name) unless File.exist?(@dir_name)
     background_element = InjectionManager.get_injection(:BackgroundInjection, background_path)
     page = "<body> #{background_element} </body>"
   else
@@ -41,15 +42,15 @@ def create_mocks(config)
       injections: [:OpenLauncherInjection, :SignupInjection]
     },
     "welcome_card" => {
-      resource: "Program Card.png",
+      resource: "Program Cards.png",
       injections: [:OpenLauncherInjection, :WelcomeCardInjection]
     },
     "referral" => {
-      resource: "Program Card.png",
+      resource: "Program Cards.png",
       injections: [:OpenLauncherInjection, :ReferralInjection]
     },
     "vip" => {
-      resource: "Program Card.png",
+      resource: "Program Cards.png",
       injections: [:OpenLauncherInjection, :VipInjection]
     }
   }
@@ -61,6 +62,7 @@ def create_mocks(config)
     if mock_code = make_mock(page, details)
       write_mock_code_to_file(html_path, mock_code)
       phantomjs_screenshot(html_path, png_path)
+      File.delete(html_path) unless ARGV[2] == "debug"
     end
   end
 
