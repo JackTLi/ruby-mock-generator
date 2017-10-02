@@ -16,6 +16,10 @@ class OpenLauncherInjection < Injection
     </style>'''
   end
 
+  def mobile_css
+    '''<style></style>'''
+  end
+
   def html
     '<div class="mock-launcher"> <img src="close.svg"> </div>'
   end

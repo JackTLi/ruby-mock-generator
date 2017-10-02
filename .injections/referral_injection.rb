@@ -20,6 +20,24 @@ class ReferralInjection < Injection
     </style>'''
   end
 
+  def mobile_css
+    '''<style>
+    .referral-receiver {
+      position: fixed;
+      left: 0px;
+      top: 0px;
+      z-index: 9999;
+      width: 375px !important;
+      height: 667px !important;
+      background-image: url("../../' + @resource_path + '");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 0px -510px;
+      box-shadow: 1px 0 20px rgba(0,0,0,.1);
+    }
+    </style>'''
+  end
+
   def html
     '<div class="referral-receiver"></div>'
   end

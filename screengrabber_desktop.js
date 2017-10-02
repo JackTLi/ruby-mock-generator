@@ -5,7 +5,7 @@ var height = 1080;
 page.viewportSize = { width: width, height: height };
 page.settings.javascriptEnabled = false;
 
-page.open('file:///Users/ruby/Documents/Scripts/ruby-mock-generator/' + system.args[1], function() {
+page.open(system.args[1], function() {
   page.clipRect = { top: 0, left: 0, width: width, height: height };
   page.render(system.args[2]);
   phantom.exit();

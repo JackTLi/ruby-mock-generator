@@ -10,5 +10,9 @@ class InjectionManager
     def get_injection(type, resource_path)
       Object.const_get(type).new(@config, resource_path).get_injection
     end
+
+    def get_mobile_injection(type, resource_path)
+      Object.const_get(type).new(@config, resource_path).get_mobile_injection
+    end
   end
 end
