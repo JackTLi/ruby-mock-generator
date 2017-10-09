@@ -27,6 +27,8 @@ def create_mocks(config)
     page.gsub!('cdn.sweettooth.io', '') # don't inject any sweettooth js that renders the old launcher
   end
   make_svg
+  make_svg(is_mobile: true)
+  copy_mobile_close_svg
 
   mocks = {
     "launcher_mock" => {
@@ -69,6 +71,8 @@ def create_mocks(config)
   unless ARGV[2] == "debug"
     File.delete("#{@dir_name}/index.html") if File.file?("#{@dir_name}/index.html")
     File.delete("#{@dir_name}/close.svg") if File.file?("#{@dir_name}/close.svg")
+    File.delete("#{@dir_name}/close_mobile.svg") if File.file?("#{@dir_name}/close_mobile.svg")
+    File.delete("#{@dir_name}/launcher-close.svg") if File.file?("#{@dir_name}/launcher-close.svg")
     File.delete("#{@dir_name}/robots.txt")if File.file?("#{@dir_name}/robots.txt")
   end
 end
@@ -81,10 +85,21 @@ def get_webpage
   File.read("#{@dir_name}/index.html")
 end
 
-def make_svg
-  svg = File.read('close.svg.template')
-  svg.gsub!('{{$COLOR}}', @config["launcher_color"])
-  open("#{@dir_name}/close.svg", 'w') { |f|
+def make_svg(is_mobile: false)
+  file_name = is_mobile ? 'close_mobile.svg.template' : 'close.svg.template'
+  out_file_name = is_mobile ? 'close_mobile' : 'close'
+  color = is_mobile ? @config["mobile_launcher_close_color"] : @config["launcher_color"]
+
+  svg = File.read(file_name)
+  svg.gsub!('{{$COLOR}}', color)
+  open("#{@dir_name}/#{out_file_name}.svg", 'w') { |f|
+    f.puts svg
+  }
+end
+
+def copy_mobile_close_svg
+  svg = File.read("launcher-close.svg")
+  open("#{@dir_name}/launcher-close.svg", 'w') { |f|
     f.puts svg
   }
 end

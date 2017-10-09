@@ -1,17 +1,19 @@
 sites:
 
 -
-  url: https://pixibeauty.co.uk/
-  orientation: "left"
-  launcher_color: '#C8D4A4'
-  asset_path: "Merchants/Pixi"
--
-  url: https://unitedbyblue.com/
+  url: https://www.homage.com
+  mobile: true
   orientation: "right"
-  launcher_color: '#052533'
-  asset_path: "Merchants/United by blue"
--
-  url: https://cycoordi.com/
-  orientation: "right"
-  launcher_color: '#87CEFA'
-  asset_path: "Merchants/Cycoordi"
+  launcher_color: '#B72025'
+  mobile_launcher_close_color: '#2223ff'
+  asset_path: "Merchants/Homage"
+# -
+#   url: https://unitedbyblue.com/
+#   orientation: "right"
+#   launcher_color: '#052533'
+#   asset_path: "Merchants/United by blue"
+# -
+#   url: https://smile.io
+#   orientation: "right"
+#   launcher_color: '#87CEFA'
+#   asset_path: "Merchants/Pixi"
